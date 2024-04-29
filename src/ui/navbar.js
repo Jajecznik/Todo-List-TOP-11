@@ -1,9 +1,33 @@
-export default function navbarComponent() {
+import { createCustomProject } from "../logic/functions";
+
+function checkAndAddNewProject() {
+    const input = document.getElementById('new-project-name');
+
+    if (input.value.trim() !== "") {
+        createCustomProject(input.value.trim());
+        cancelNewProject();
+    }
+}
+
+function cancelNewProject() {
+    const input = document.getElementById('new-project-name');
+    const buttons = document.querySelector('.new-project-buttons');
+    const submit = document.getElementById('add-new-project');
+    const cancel = document.getElementById('cancel-new-project');
+
+    submit.removeEventListener('click', checkAndAddNewProject);
+    cancel.removeEventListener('click', cancelNewProject);
+    if (buttons) buttons.remove();
+    if (input) input.remove();
+}
+
+const navbarComponent = () => {
     const content = document.getElementById('content');
     const navElement = document.createElement('nav');
 
     // page title
     const titleElement = document.createElement('p');
+    titleElement.classList.add('page-title');
     titleElement.innerText = "Todo List";
     navElement.appendChild(titleElement);
 
@@ -17,7 +41,7 @@ export default function navbarComponent() {
     const newProjectContainer = document.createElement('div');
     newProjectContainer.classList.add('new-project');
     const newProjectButton = document.createElement('button');
-    newProjectButton.setAttribute("id", "new-task-button");
+    newProjectButton.setAttribute("id", "new-project-button");
     newProjectButton.innerText = "Add project";
     newProjectContainer.appendChild(newProjectButton);
     navElement.appendChild(newProjectContainer);
@@ -58,5 +82,10 @@ export default function navbarComponent() {
         buttonsContainer.appendChild(cancel);
 
         projectsContainer.appendChild(buttonsContainer);
+
+        submit.addEventListener('click', checkAndAddNewProject);
+        cancel.addEventListener('click', cancelNewProject);
     });
-}
+};
+
+export { navbarComponent };

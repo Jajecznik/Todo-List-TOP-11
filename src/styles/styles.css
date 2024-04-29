@@ -21,7 +21,6 @@ body {
 
 #content {
     width: 100%;
-    background-color: whitesmoke;
 }
 
 #content>nav {
@@ -31,6 +30,7 @@ body {
     width: 20%;
     height: 100%;
     background-color: #272727;
+    border-right: 1px solid whitesmoke;
 }
 
 #content>nav>p {
@@ -47,7 +47,15 @@ body {
 }
 
 .project {
+    padding: 10px;
     color: whitesmoke;
+    cursor: pointer;
+}
+
+
+.project:hover {
+    border-radius: 8px;
+    background-color: #474747;
 }
 
 .new-project {
@@ -57,6 +65,7 @@ body {
     border-bottom: 1px solid whitesmoke;
 }
 
+#new-project-button,
 #new-task-button {
     margin: 20px;
     padding: 10px;
@@ -70,4 +79,18 @@ body {
 
 #new-task-button:hover {
     background-color: white;
+}
+
+.tasks-container {
+    position: absolute;
+    left: 20%;
+    top: 0;
+    width: 80%;
+    height: 100%;
+    background-color: aliceblue;
+}
+
+.add-task-container {
+    border-bottom: 1px solid whitesmoke;
+    background-color: #272727;
 }

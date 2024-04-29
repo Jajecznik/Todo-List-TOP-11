@@ -1,3 +1,7 @@
+import { v4 as uuidv4 } from 'uuid';
+import { Task } from "../logic/classes";
+import { addTaskToProject } from '../logic/functions';
+
 const newTaskModal = () => {
     const modalContainer = document.createElement('div');
     modalContainer.setAttribute('id', 'modal');
@@ -19,6 +23,7 @@ const newTaskModal = () => {
     const closeBtn = document.createElement('button');
     closeBtn.setAttribute('id', 'new-task-close');
     closeBtn.innerHTML = "&times;";
+    closeBtn.addEventListener('click', closeBtnClickHandler);
     headerContainer.appendChild(closeBtn);
     modalContent.appendChild(headerContainer);
 
@@ -75,6 +80,7 @@ const newTaskModal = () => {
     const options = ['high', 'medium', 'low'];
     for (let i = 0; i < 3; i++) {
         const option = document.createElement('option');
+
         option.setAttribute('value', options[i]);
         option.innerText = options[i].charAt(0).toUpperCase() + options[i].slice(1);
         prioritySelect.appendChild(option);
@@ -88,14 +94,14 @@ const newTaskModal = () => {
     submit.setAttribute('id', 'submit');
     submit.setAttribute('name', 'submit');
     submit.value = "Add task";
+    submit.addEventListener('click', submitNewTaskHandler);
     form.appendChild(submit);
 
     modalContent.appendChild(form);
     modalContainer.appendChild(modalContent);
-    closeBtn.addEventListener('click', closeBtnClickHandler);
 
     return modalContainer;
-}
+};
 
 const modalBackground = () => {
     const background = document.createElement('div');
@@ -103,16 +109,33 @@ const modalBackground = () => {
     background.classList.add('modal-background');
 
     return background;
-}
+};
 
 function closeBtnClickHandler() {
     const background = document.getElementById('modal-background');
     const modal = document.getElementById('modal');
+    const submitBtn = document.getElementById('submit');
     const closeBtn = document.getElementById('new-task-close');
 
+    submitBtn.removeEventListener('click', submitNewTaskHandler);
     closeBtn.removeEventListener('click', closeBtnClickHandler);
-    modal.remove();
-    background.remove();
+
+    if (modal) modal.remove();
+    if (background) background.remove();
+}
+
+function submitNewTaskHandler(event) {
+    event.preventDefault();
+
+    const id = uuidv4();
+    const title = document.getElementById('title').value;
+    const description = document.getElementById('description').value;
+    const dueDate = document.getElementById('due-date').value;
+    const priority = document.getElementById('priority').value;
+    const newTask = new Task(id, title, description, dueDate, priority);
+
+    addTaskToProject(newTask);
+    closeBtnClickHandler();
 }
 
 export { newTaskModal, modalBackground };
