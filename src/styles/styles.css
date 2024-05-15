@@ -14,23 +14,23 @@
 }
 
 body {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     font-family: 'Roboto';
 }
 
 #content {
+    display: flex;
     width: 100%;
+    height: 100%;
 }
 
 #content>nav {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 20%;
     height: 100%;
     background-color: #272727;
     border-right: 1px solid whitesmoke;
+    overflow-y: auto;
 }
 
 #content>nav>p {
@@ -48,26 +48,62 @@ body {
 
 .project {
     padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     color: whitesmoke;
     cursor: pointer;
 }
-
 
 .project:hover {
     border-radius: 8px;
     background-color: #474747;
 }
 
+.buttons {
+    display: flex;
+    align-items: center;
+}
+
+.buttons>span:first-child {
+    margin-right: 5px;
+    color: lime;
+}
+
+.buttons>span:last-child {
+    margin-left: 5px;
+    color: red;
+}
+
+.confirm {
+    margin-left: 5px;
+    color: lime;
+}
+
+.project-info-message {
+    margin-top: 10px;
+    font-size: 1.25rem;
+    color: red;
+}
+
 .new-project {
+    padding: 20px;
     display: flex;
     justify-content: center;
     border-top: 1px solid whitesmoke;
     border-bottom: 1px solid whitesmoke;
 }
 
+.new-project-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
 #new-project-button,
-#new-task-button {
-    margin: 20px;
+#new-task-button,
+#add-new-project,
+#cancel-new-project {
     padding: 10px;
     font-weight: bold;
     border-radius: 8px;
@@ -77,20 +113,75 @@ body {
     transition: background-color 0.2s ease-in-out;
 }
 
-#new-task-button:hover {
+#new-task-button:hover,
+#new-task-button:hover,
+#add-new-project:hover,
+#cancel-new-project:hover {
     background-color: white;
 }
 
 .tasks-container {
-    position: absolute;
-    left: 20%;
-    top: 0;
     width: 80%;
     height: 100%;
     background-color: aliceblue;
 }
 
 .add-task-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     border-bottom: 1px solid whitesmoke;
     background-color: #272727;
+}
+
+.add-task-container>.project-name {
+    font-size: 1.5rem;
+    color: whitesmoke;
+}
+
+.tasks-content {
+    padding: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+}
+
+.task {
+    padding: 20px;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.title-info {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.description-info,
+.task-due-date-title,
+.task-priority-title {
+    margin-top: 15px;
+    font-size: 1.25rem;
+}
+
+.task-due-date-title,
+.task-priority-title {
+    font-weight: bold;
+}
+
+.due-date-info,
+.priority-info {
+    margin-top: 5px;
+    font-size: 1.25rem;
+}
+
+.task>.buttons {
+    margin-top: 10px;
+}
+
+.hidden {
+    display: none;
 }

@@ -1,5 +1,7 @@
 # Todo-List-TOP-11
 
+A simple to-do list that allows the user to create, edit or delete projects that may contain tasks. Tasks can also be edited or deleted. The website uses the localStorage, which saves data in the user's browser.
+
 ## Assignment
 
 1. Your ‘todos’ are going to be objects that you’ll want to dynamically create, which means either using factories or constructors/classes to generate them.

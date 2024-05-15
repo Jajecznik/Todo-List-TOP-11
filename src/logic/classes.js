@@ -9,6 +9,10 @@ class Project {
             tasks.push(task);
         };
 
+        this.deleteTask = (id) => {
+            tasks = tasks.filter(task => task.id !== id);
+        }
+
         this.getTasks = () => {
             return tasks;
         };
